@@ -14,6 +14,8 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {quoteErrors: action.quoteErrors});
     case "SET_CATEGORY":
       return Object.assign({}, state, {categoryId: action.categoryId});
+    case "SET_IS_LOADING":
+      return Object.assign({}, state, {isLoading: action.isLoading});
     default:
       return state;
   }

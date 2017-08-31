@@ -10,13 +10,14 @@ const quote = {
   author: 'John Doe',
   createdAt: '2017-01-01T12:10:10.10'
 };
-function setup() {
+function setup(isLoading = false) {
   const props = {
     fetchQuotes: jest.fn(),
     deleteQuote: jest.fn(),
     updateQuote: jest.fn(),
     categories: [],
-    quotes: [quote, quote]
+    quotes: [quote, quote],
+    isLoading
   };
 
   const wrapper = shallow(<Comp {...props}/>);
@@ -33,6 +34,11 @@ describe('components', () => {
     it('fetch quotes on mount', () => {
       const { props } = setup();
       expect(props.fetchQuotes).toBeCalled();
+    });
+
+    it('show overlay', () => {
+      const { wrapper } = setup(true);
+      expect(wrapper.find('.is-overlay').exists()).toBeTruthy();
     });
   });
 });

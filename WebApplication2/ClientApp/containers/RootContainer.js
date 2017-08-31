@@ -11,7 +11,7 @@ import Modal from '../components/modal';
 
 const App =  (props) => {
   const { store, actions } = props;
-  const { authorName, quotes, categories, categoryId, isOpenModal, quote, quoteErrors } = store;
+  const { authorName, quotes, categories, categoryId, isOpenModal, quote, quoteErrors, isLoading } = store;
   const { setAuthorName, fetchQuotes, setCategory, updateQuote,
           setModal, setQuote, createQuote, deleteQuote } = actions;
     return (
@@ -27,7 +27,7 @@ const App =  (props) => {
                 <div className="column">
                   <Search {...{authorName, setAuthorName, fetchQuotes}}/>
                   <hr/>
-                  <QuotesList {...{quotes, fetchQuotes, deleteQuote, categories, updateQuote}}/>
+                  <QuotesList {...{quotes, fetchQuotes, deleteQuote, categories, updateQuote, isLoading}}/>
                 </div>
               </div>
             </div>

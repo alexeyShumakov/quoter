@@ -39,6 +39,11 @@ describe('actions', () => {
     expect(appActions.setCategory(1)).toEqual(action);
   });
 
+  it('setLoading', () => {
+    const action = {type: 'SET_IS_LOADING', isLoading: false};
+    expect(appActions.setLoading(false)).toEqual(action);
+  });
+
   it('deleteQuote', (done) => {
     const store = mockStore({authorName: 'name', categoryId: 1});
 
@@ -103,7 +108,7 @@ describe('actions', () => {
           .toBeCalledWith("/api/quotes", {"author": "author", "id": 1});
         expect(axios.get)
           .toBeCalledWith("/api/quotes", {"params": {"author": "name", "categoryId": 1}});
-        expect(store.getActions().length).toEqual(4);
+        expect(store.getActions().length).toEqual(6);
         done();
       } catch(error) {
         done.fail(error);

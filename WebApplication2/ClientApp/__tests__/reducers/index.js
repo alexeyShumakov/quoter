@@ -46,6 +46,15 @@ describe('reducers', () => {
       .toEqual({quoteErrors: ['err']});
   });
 
+  it('set is loading', () => {
+    expect(reducer({isLoading: true}, {
+      type: 'SET_IS_LOADING',
+      isLoading: false
+    }))
+      .toEqual({isLoading: false});
+
+  });
+
   it('set category', () => {
     expect(reducer({categoryId: 1}, {
       type: 'SET_CATEGORY',

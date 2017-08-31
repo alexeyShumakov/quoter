@@ -23,8 +23,13 @@ export function setCategory(categoryId) {
   return { type: 'SET_CATEGORY', categoryId }
 }
 
+export function setLoading(isLoading) {
+  return { type: 'SET_IS_LOADING', isLoading}
+}
+
 export function deleteQuote(id) {
   return(dispatch) => {
+    dispatch(setLoading(true));
     return axios.delete(`/api/quotes/${id}/delete`).then(() => {
       return dispatch(fetchQuotes());
     });
@@ -35,8 +40,10 @@ export  function fetchQuotes() {
   return(dispatch, getState) => {
     const categoryId = getState().categoryId;
     const author = getState().authorName;
+    dispatch(setLoading(true));
     return axios.get('/api/quotes',{params: {author, categoryId}}).then((response) => {
-      return dispatch(setQuotes(response.data));
+      dispatch(setQuotes(response.data));
+      return dispatch(setLoading(false));
     });
   }
 }

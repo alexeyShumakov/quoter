@@ -10,6 +10,7 @@ export default  {
     author: '',
     categoryId
   },
+  isLoading: true,
   quoteErrors: [],
   isOpenModal: false,
   authorName: '',
