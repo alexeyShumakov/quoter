@@ -30,7 +30,7 @@ export function setLoading(isLoading) {
 export function deleteQuote(id) {
   return(dispatch) => {
     dispatch(setLoading(true));
-    return axios.delete(`/api/quotes/${id}/delete`).then(() => {
+    return axios.delete(`/api/quotes/delete/${id}`).then(() => {
       return dispatch(fetchQuotes());
     });
   }
@@ -50,14 +50,14 @@ export  function fetchQuotes() {
 
 export function updateQuote(quote) {
   return () => {
-    return axios.patch(`/api/quotes/${quote.id}`, quote);
+    return axios.patch(`/api/quotes/update/${quote.id}`, quote);
   }
 }
 
 export function createQuote() {
   return(dispatch, getState) => {
     const { quote } = getState();
-    return axios.post('/api/quotes', quote).then(() => {
+    return axios.post('/api/quotes/create', quote).then(() => {
       dispatch(setModal(false));
       dispatch(setQuoteErrors([]));
       dispatch(setQuote(Object.assign({}, quote, {body: '', author: ''})));

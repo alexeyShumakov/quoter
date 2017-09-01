@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using QuoterWeb.Repository;
 
-namespace WebApplication2
+namespace QuoterWeb
 {
     public class Startup
     {
@@ -22,6 +23,8 @@ namespace WebApplication2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<QuoteRepository>();
+            services.AddTransient<CategoryRepository>();
             services.AddMvc();
         }
 
@@ -49,6 +52,10 @@ namespace WebApplication2
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "api",
+                    template: "api/{controller=Quotes}/{action=Index}/{id?}");
 
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",

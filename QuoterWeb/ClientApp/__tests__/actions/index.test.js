@@ -54,7 +54,7 @@ describe('actions', () => {
     setTimeout(() => {
       try {
         expect(axios.delete)
-          .toBeCalledWith("/api/quotes/1/delete");
+          .toBeCalledWith("/api/quotes/delete/1");
         expect(axios.get)
           .toBeCalledWith("/api/quotes", {"params": {"author": "name", "categoryId": 1}});
         done();
@@ -88,7 +88,7 @@ describe('actions', () => {
     setTimeout(() => {
       try {
         expect(axios.patch)
-          .toBeCalledWith("/api/quotes/1", {"author": "author", "id": 1});
+          .toBeCalledWith("/api/quotes/update/1", {"author": "author", "id": 1});
         done();
       } catch(error) {
         done.fail(error);
@@ -105,7 +105,7 @@ describe('actions', () => {
     setTimeout(() => {
       try {
         expect(axios.post)
-          .toBeCalledWith("/api/quotes", {"author": "author", "id": 1});
+          .toBeCalledWith("/api/quotes/create", {"author": "author", "id": 1});
         expect(axios.get)
           .toBeCalledWith("/api/quotes", {"params": {"author": "name", "categoryId": 1}});
         expect(store.getActions().length).toEqual(6);

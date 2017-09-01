@@ -5,9 +5,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApplication2.Models;
+using QuoterWeb.Models;
 
-namespace WebApplication2.Repository
+namespace QuoterWeb.Repository
 {
     public class QuoteRepository
     {
@@ -25,7 +25,7 @@ namespace WebApplication2.Repository
             }
         }
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
         {
             using (IDbConnection dbConnection = Connection)
             {
@@ -36,7 +36,7 @@ namespace WebApplication2.Repository
 
         }
 
-        public void Update(int id, Quote quote)
+        public virtual void Update(int id, Quote quote)
         {
             using (IDbConnection dbConnection = Connection)
             {
@@ -46,7 +46,7 @@ namespace WebApplication2.Repository
             }
         }
 
-        public void Add(Quote quote)
+        public virtual void Add(Quote quote)
         {
             using (IDbConnection dbConnection = Connection)
             {
@@ -56,7 +56,7 @@ namespace WebApplication2.Repository
             }
         }
 
-        public List<Quote> Search(string author, int categoryId)
+        public virtual List<Quote> Search(string author, int categoryId)
         {
             using (IDbConnection dbConnection = Connection)
             {
@@ -73,15 +73,6 @@ namespace WebApplication2.Repository
                     new { CategoryId = categoryId, Author = author }).ToList();
             }
 
-        }
-        public List<Quote> All()
-        {
-            using (IDbConnection dbConnection = Connection)
-            {
-                string sQuery = " SELECT * FROM Quotes AS q INNER JOIN Categories AS c ON q.CategoryId = c.Id ";
-                dbConnection.Open();
-                return dbConnection.Query<Quote, Category, Quote>(sQuery, (quote, category) => { quote.Category = category; return quote; }).ToList();
-            }
         }
     }
 }

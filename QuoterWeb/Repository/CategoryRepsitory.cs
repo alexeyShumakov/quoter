@@ -5,9 +5,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApplication2.Models;
+using QuoterWeb.Models;
 
-namespace WebApplication2.Repository
+namespace QuoterWeb.Repository
 {
     public class CategoryRepository
     {
@@ -25,7 +25,7 @@ namespace WebApplication2.Repository
             }
         }
 
-        public List<Category> All()
+        public virtual List<Category> All()
         {
             using (IDbConnection dbConnection = Connection)
             {

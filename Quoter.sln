@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication2", "WebApplication2\WebApplication2.csproj", "{77FC029A-9545-44AA-B190-7A5FFF72AD22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuoterWeb", "QuoterWeb\QuoterWeb.csproj", "{77FC029A-9545-44AA-B190-7A5FFF72AD22}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{159F7C85-1025-4097-B44D-731F24ECB9FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuoterTests", "QuoterTests\QuoterTests.csproj", "{159F7C85-1025-4097-B44D-731F24ECB9FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
