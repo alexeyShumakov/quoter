@@ -1,35 +1,28 @@
-﻿using Dapper;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Threading.Tasks;
+using Dapper;
 using QuoterWeb.Models;
 
 namespace QuoterWeb.Repository
 {
     public class CategoryRepository
     {
-        private string connectionString;
+        private readonly string connectionString;
+
         public CategoryRepository()
         {
             connectionString = @"Server=localhost;Database=QuoterDevelopment;Trusted_Connection=true;";
         }
 
-        public IDbConnection Connection
-        {
-            get
-            {
-                return new SqlConnection(connectionString);
-            }
-        }
+        public IDbConnection Connection => new SqlConnection(connectionString);
 
         public virtual List<Category> All()
         {
-            using (IDbConnection dbConnection = Connection)
+            using (var dbConnection = Connection)
             {
-                string sQuery = "SELECT * FROM Categories";
+                var sQuery = "SELECT * FROM Categories";
                 dbConnection.Open();
                 return dbConnection.Query<Category>(sQuery).ToList();
             }

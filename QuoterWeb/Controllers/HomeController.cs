@@ -1,18 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using QuoterWeb.Models;
-using QuoterWeb.Repository;
 using Newtonsoft.Json;
+using QuoterWeb.Repository;
 
 namespace QuoterWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private CategoryRepository _repo;
+        private readonly CategoryRepository _repo;
 
         public HomeController(CategoryRepository repo)
         {
@@ -21,7 +16,7 @@ namespace QuoterWeb.Controllers
 
         public IActionResult Index()
         {
-            List<Category> categories = _repo.All();
+            var categories = _repo.All();
 
             ViewData["JsonCategories"] = JsonConvert.SerializeObject(categories);
 

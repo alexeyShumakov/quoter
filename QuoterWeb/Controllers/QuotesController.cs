@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using QuoterWeb.Repository;
 using QuoterWeb.Models;
+using QuoterWeb.Repository;
 
 namespace QuoterWeb.Controllers
 {
@@ -19,54 +15,49 @@ namespace QuoterWeb.Controllers
             _repo = repo;
         }
 
-        public JsonResult Index([FromQuery]Quote parameters)
+        public JsonResult Index([FromQuery] Quote parameters)
         {
-            List<Quote> quotes = _repo.Search(parameters.Author, parameters.CategoryId);
+            var quotes = _repo.Search(parameters.Author, parameters.CategoryId);
             return Json(quotes);
         }
 
         [HttpPost]
-        public JsonResult Create([FromBody]Quote newQuote)
+        public JsonResult Create([FromBody] Quote newQuote)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _repo.Add(newQuote);
-                return Json(new { status = "created"});
-            } else
-            {
-                Response.StatusCode = 422;
-
-                var errorList = (from item in ModelState
-                        where item.Value.Errors.Any() 
-                        select item.Value.Errors[0].ErrorMessage).ToList();
-                return Json(errorList);
+                return Json(new {status = "created"});
             }
+            Response.StatusCode = 422;
 
+            var errorList = (from item in ModelState
+                where item.Value.Errors.Any()
+                select item.Value.Errors[0].ErrorMessage).ToList();
+            return Json(errorList);
         }
 
         [HttpDelete]
         public JsonResult Delete(int id)
         {
             _repo.Delete(id);
-            return Json(new { status = "deleted"});
+            return Json(new {status = "deleted"});
         }
 
         [HttpPatch]
-        public JsonResult Update(int id, [FromBody]Quote quote)
+        public JsonResult Update(int id, [FromBody] Quote quote)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _repo.Update(id, quote);
-                return Json(new { status = "updated"});
-            } else
-            {
-                Response.StatusCode = 422;
-
-                var errorList = (from item in ModelState
-                        where item.Value.Errors.Any() 
-                        select item.Value.Errors[0].ErrorMessage).ToList();
-                return Json(errorList);
+                return Json(new {status = "updated"});
             }
+            Response.StatusCode = 422;
+
+            var errorList = (from item in ModelState
+                where item.Value.Errors.Any()
+                select item.Value.Errors[0].ErrorMessage).ToList();
+            return Json(errorList);
         }
     }
 }
