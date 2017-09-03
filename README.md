@@ -13,8 +13,9 @@
 4. sqlcmd -S localhost -i .\CreateDb.sql
 5. cd QuoterWeb
 6. npm i
-7. webpack --config webpack.config.vendor.js
-8. dotnet run
+7. webpack
+8. webpack --config webpack.config.vendor.js
+9. dotnet run
 
 ### Tests
 
@@ -22,5 +23,3 @@
 2. npm test
 3. cd QuoterTests
 4. dotnet test
-
-... PROFIT
